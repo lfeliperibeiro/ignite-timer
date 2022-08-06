@@ -27,11 +27,17 @@ export const FormContainer = styled.div`
   flex-wrap: wrap;
 `
 
-const BaseInput = styled.input`
+interface BaseInputProps {
+  error?: boolean
+}
+
+const BaseInput = styled.input<BaseInputProps>`
   background: transparent;
   height: 2.5rem;
   border: 0;
-  border-bottom: 2px solid ${(props) => props.theme['gray-500']};
+  border-bottom: 2px solid
+    ${(props) =>
+      props.error ? props.theme['red-500'] : props.theme['gray-500']};
   font-weight: bold;
   font-size: 1.125rem;
   padding: 0 0.5rem;
@@ -39,7 +45,8 @@ const BaseInput = styled.input`
 
   &:focus {
     box-shadow: none;
-    border-color: ${(props) => props.theme['green-500']};
+    border-color: ${(props) =>
+      props.error ? props.theme['red-500'] : props.theme['gray-500']};
   }
 
   &::placeholder {
@@ -103,4 +110,9 @@ export const StartCountdownButton = styled.button`
   &:not(:disabled):hover {
     background: ${(props) => props.theme['green-700']};
   }
+`
+
+export const ErrorMessage = styled.p`
+  color: ${(props) => props.theme['red-500']};
+  font-size: 1rem;
 `
